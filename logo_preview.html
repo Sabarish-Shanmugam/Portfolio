@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Preview Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+            padding: 3rem 1rem;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1.1rem;
+        }
+
+        .gallery {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .logo-option {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .logo-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .option-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-display {
+            background: #f8f9fa;
+            padding: 3rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-title {
+            font-size: 1.4rem;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .option-desc {
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .option-tag {
+            display: inline-block;
+            background: #eef2ff;
+            color: #667eea;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* LOGO 1: Flux Morphing */
+        .logo1-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .flux-box {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            animation: morph 8s ease-in-out infinite;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .flux-box::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+
+        @keyframes morph {
+
+            0%,
+            100% {
+                border-radius: 5px;
+                transform: rotate(0deg);
+            }
+
+            25% {
+                border-radius: 50%;
+                transform: rotate(90deg);
+            }
+
+            50% {
+                border-radius: 5px 50% 5px 50%;
+                transform: rotate(180deg);
+            }
+
+            75% {
+                border-radius: 50%;
+                transform: rotate(270deg);
+            }
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: #2d3748;
+            letter-spacing: 1px;
+        }
+
+        /* LOGO 2: Delta Triangle */
+        .logo2-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .delta-triangle {
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 45px solid #667eea;
+            filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.5));
+            animation: pulse-triangle 3s infinite;
+        }
+
+        @keyframes pulse-triangle {
+
+            0%,
+            100% {
+                transform: scale(1);
+                border-bottom-color: #667eea;
+            }
+
+            50% {
+                transform: scale(1.15);
+                border-bottom-color: #764ba2;
+            }
+        }
+
+        /* LOGO 3: Bridge */
+        .logo3-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .bridge-visual {
+            width: 70px;
+            height: 40px;
+            position: relative;
+        }
+
+        .bridge-box-left {
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 20px;
+            height: 14px;
+            background: #667eea;
+            border-radius: 3px;
+            animation: float-left 2s ease-in-out infinite;
+        }
+
+        .bridge-box-right {
+            position: absolute;
+            right: 0;
+            top: 14px;
+            width: 20px;
+            height: 14px;
+            background: #764ba2;
+            border-radius: 3px;
+            animation: float-right 2s ease-in-out infinite 1s;
+        }
+
+        .bridge-connector {
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            top: 19px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .bridge-dot {
+            position: absolute;
+            left: 50%;
+            top: 16px;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes float-left {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes float-right {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.3);
+            }
+        }
+
+        /* LOGO 4: Arrows */
+        .logo4-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .arrows-visual {
+            width: 60px;
+            height: 40px;
+            position: relative;
+        }
+
+        .arrow-shape {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            top: 10px;
+        }
+
+        .arrow1 {
+            left: 0;
+            border-left: 15px solid #667eea;
+            opacity: 0.5;
+            animation: slide-arrow 2s ease-in-out infinite;
+        }
+
+        .arrow2 {
+            left: 15px;
+            border-left: 15px solid #667eea;
+            opacity: 0.75;
+            animation: slide-arrow 2s ease-in-out infinite 0.3s;
+        }
+
+        .arrow3 {
+            left: 30px;
+            border-left: 15px solid #764ba2;
+            opacity: 1;
+            animation: slide-arrow 2s ease-in-out infinite 0.6s;
+        }
+
+        @keyframes slide-arrow {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(10px);
+            }
+        }
+
+        /* LOGO 5: Circle */
+        .logo5-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .circle-visual {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        .circle-ring {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #667eea;
+            border-radius: 50%;
+            border-top-color: #764ba2;
+            border-right-color: #764ba2;
+            animation: rotate-circle 2s linear infinite;
+        }
+
+        .circle-center {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes rotate-circle {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* LOGO 6: Steps */
+        .logo6-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .steps-visual {
+            width: 60px;
+            height: 40px;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .step-bar {
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            width: 12px;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .step1 {
+            height: 10px;
+            animation: grow-step 2s ease-in-out infinite;
+        }
+
+        .step2 {
+            height: 18px;
+            animation: grow-step 2s ease-in-out infinite 0.2s;
+        }
+
+        .step3 {
+            height: 26px;
+            animation: grow-step 2s ease-in-out infinite 0.4s;
+        }
+
+        .step4 {
+            height: 34px;
+            animation: grow-step 2s ease-in-out infinite 0.6s;
+        }
+
+        @keyframes grow-step {
+
+            0%,
+            100% {
+                transform: scaleY(0.85);
+            }
+
+            50% {
+                transform: scaleY(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>🎨 Choose Your Transformation Logo</h1>
+        <p>All logos are animated. Hover to see hover effects!</p>
+    </div>
+
+    <div class="gallery">
+        <!-- OPTION 1 -->
+        <div class="logo-option">
+            <div class="option-number">1</div>
+            <div class="logo-display">
+                <div class="logo1-container">
+                    <div class="flux-box"></div>
+                    <span class="logo-text">TRANSFORM</span>
+                </div>
+            </div>
+            <h3 class="option-title">Flux State (Morphing)</h3>
+            <p class="option-desc">Continuously transforms from square to circle to organic shape. Represents constant
+                evolution and adaptability.</p>
+            <span class="option-tag">Best for: Innovation & Change</span>
+        </div>
+
+        <!-- OPTION 2 -->
+        <div class="logo-option">
+            <div class="option-number">2</div>
+            <div class="logo-display">
+                <div class="logo2-container">
+                    <div class="delta-triangle"></div>
+                    <span class="logo-text">TRANSFORM</span>
+                </div>
+            </div>
+            <h3 class="option-title">Delta (Δ Symbol)</h3>
+            <p class="option-desc">Greek letter representing change and difference. Pulses to show dynamic
+                transformation. Professional and mathematical.</p>
+            <span class="option-tag">Best for: Analytical & Professional</span>
+        </div>
+
+        <!-- OPTION 3 -->
+        <div class="logo-option">
+            <div class="option-number">3</div>
+            <div class="logo-display">
+                <div class="logo3-container">
+                    <div class="bridge-visual">
+                        <div class="bridge-box-left"></div>
+                        <div class="bridge-connector"></div>
+                        <div class="bridge-dot"></div>
+                        <div class="bridge-box-right"></div>
+                    </div>
+                    <span class="logo-text">TRANSFORM</span>
+                </div>
+            </div>
+            <h3 class="option-title">Bridge Builder</h3>
+            <p class="option-desc">Two elements connected through a central hub. Perfect match for "bridging business
+                needs with cloud solutions."</p>
+            <span class="option-tag">Best for: Integration Focus ⭐</span>
+        </div>
+
+        <!-- OPTION 4 -->
+        <div class="logo-option">
+            <div class="option-number">4</div>
+            <div class="logo-display">
+                <div class="logo4-container">
+                    <div class="arrows-visual">
+                        <div class="arrow-shape arrow1"></div>
+                        <div class="arrow-shape arrow2"></div>
+                        <div class="arrow-shape arrow3"></div>
+                    </div>
+                    <span class="logo-text">TRANSFORM</span>
+                </div>
+            </div>
+            <h3 class="option-title">Forward Momentum</h3>
+            <p class="option-desc">Progressive arrows showing continuous forward movement. Represents momentum,
+                progress, and directional change.</p>
+            <span class="option-tag">Best for: Progress & Growth</span>
+        </div>
+
+        <!-- OPTION 5 -->
+        <div class="logo-option">
+            <div class="option-number">5</div>
+            <div class="logo-display">
+                <div class="logo5-container">
+                    <div class="circle-visual">
+                        <div class="circle-ring"></div>
+                        <div class="circle-center"></div>
+                    </div>
+                    <span class="logo-text">TRANSFORM</span>
+                </div>
+            </div>
+            <h3 class="option-title">Cycle of Change</h3>
+            <p class="option-desc">Rotating circle representing iterative process and continuous improvement. Great for
+                agile methodologies.</p>
+            <span class="option-tag">Best for: Agile & Iterative</span>
+        </div>
+
+        <!-- OPTION 6 -->
+        <div class="logo-option">
+            <div class="option-number">6</div>
+            <div class="logo-display">
+                <div class="logo6-container">
+                    <div class="steps-visual">
+                        <div class="step-bar step1"></div>
+                        <div class="step-bar step2"></div>
+                        <div class="step-bar step3"></div>
+                        <div class="step-bar step4"></div>
+                    </div>
+                    <span class="logo-text">TRANSFORM</span>
+                </div>
+            </div>
+            <h3 class="option-title">Elevation (Steps)</h3>
+            <p class="option-desc">Ascending steps showing continuous improvement and growth over time. Represents
+                upward trajectory and development.</p>
+            <span class="option-tag">Best for: Growth & Excellence</span>
+        </div>
+    </div>
+</body>
+
+</html>
