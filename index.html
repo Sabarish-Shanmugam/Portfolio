@@ -11,7 +11,7 @@
     <meta property="og:title" content="Sabarish - Business Analyst & Product Owner">
     <meta property="og:description"
         content="Driving transformation and delivering customer-centric outcomes through cloud-powered solutions.">
-    <meta property="og:image" content="https://yourwebsite.com/preview-image.png">
+    <meta property="og:image" content="https://sabarish-shanmugam.github.io/Portfolio/reqwise_icon.png">
 
     <!-- Favicon (Replace with your own) -->
     <link rel="icon"
@@ -103,6 +103,7 @@
             font-weight: 800;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 0.5px;
         }
@@ -829,22 +830,6 @@
                 transform: translateY(0);
             }
         }
-
-        /* Mobile Adjustments */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                /* Hidden for now, simple portfolio usually ok with scroll */
-            }
-
-            /* If you want a mobile menu, you need JS. 
-               For a simple one-page portfolio, sticking to the hero buttons is often cleaner 
-               than a broken hamburger menu without JS. */
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-        }
     </style>
 </head>
 
@@ -965,60 +950,7 @@
             </div>
         </section>
 
-        <script>
-            // Mobile menu toggle
-            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-            const navLinks = document.getElementById('navLinks');
 
-            mobileMenuToggle.addEventListener('click', function () {
-                navLinks.classList.toggle('active');
-                this.textContent = navLinks.classList.contains('active') ? '×' : '☰';
-            });
-
-            // Close mobile menu when clicking a link
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    mobileMenuToggle.textContent = '☰';
-                });
-            });
-
-            // Back to top button
-            const backToTop = document.getElementById('backToTop');
-
-            window.addEventListener('scroll', function () {
-                if (window.pageYOffset > 300) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
-            });
-
-            backToTop.addEventListener('click', function () {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-
-            // About section toggle
-            function toggleAbout() {
-                const details = document.getElementById('aboutDetails');
-                const btn = document.getElementById('expandBtn');
-                const btnText = btn.querySelector('span:first-child');
-
-                details.classList.toggle('expanded');
-                btn.classList.toggle('expanded');
-
-                if (details.classList.contains('expanded')) {
-                    btnText.textContent = 'Show Less';
-                } else {
-                    btnText.textContent = 'Learn More About Me';
-                }
-            }
-
-            // Contact Form Handler (placeholder - needs secure implementation)
-        </script>
 
         <section id="projects" class="projects">
             <div class="container">
@@ -1182,22 +1114,7 @@
                 </div>
                 <div class="article-grid">
 
-                    <!-- 
-                ==========================================================
-                HOW TO ADD YOUR LINKEDIN ARTICLES:
-                ==========================================================
-                1. Go to your LinkedIn profile
-                2. Find your article/post
-                3. Click on it and copy the URL from your browser
-                4. Copy one of the article blocks below
-                5. Replace the title, date, description, and href="#"
-                
-                Example LinkedIn URL format:
-                https://www.linkedin.com/pulse/your-article-title-your-name/
-                or
-                https://www.linkedin.com/posts/yourprofile_activity-xxxxx/
-                ==========================================================
-                -->
+
 
                     <!-- ARTICLE 1 -->
                     <article class="article-card">
@@ -1270,25 +1187,7 @@
                             class="link-text" target="_blank" rel="noopener noreferrer">Read on LinkedIn →</a>
                     </article>
 
-                    <!-- 
-                ==========================================================
-                TO ADD MORE ARTICLES IN THE FUTURE:
-                ==========================================================
-                Copy the entire <article> block above and paste below.
-                The grid will automatically adjust to fit more articles!
-                ==========================================================
-                -->
 
-                    <!-- FUTURE ARTICLE TEMPLATE - COPY THIS BLOCK TO ADD MORE
-                <article class="article-card">
-                    <div class="article-meta">Month YYYY • Category</div>
-                    <h3>Your Article Title Here</h3>
-                    <p class="project-description">
-                        A brief excerpt or description of what your article is about.
-                    </p>
-                    <a href="PASTE_YOUR_LINKEDIN_ARTICLE_URL_HERE" class="link-text" target="_blank" rel="noopener noreferrer">Read on LinkedIn →</a>
-                </article>
-                -->
 
                 </div>
             </div>
@@ -1336,6 +1235,57 @@
         </footer>
 
         <script>
+            // Mobile menu toggle
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            mobileMenuToggle.addEventListener('click', function () {
+                navLinks.classList.toggle('active');
+                this.textContent = navLinks.classList.contains('active') ? '×' : '☰';
+            });
+
+            // Close mobile menu when clicking a link
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                });
+            });
+
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', function () {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+
+            backToTop.addEventListener('click', function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // About section toggle
+            function toggleAbout() {
+                const details = document.getElementById('aboutDetails');
+                const btn = document.getElementById('expandBtn');
+                const btnText = btn.querySelector('span:first-child');
+
+                details.classList.toggle('expanded');
+                btn.classList.toggle('expanded');
+
+                if (details.classList.contains('expanded')) {
+                    btnText.textContent = 'Show Less';
+                } else {
+                    btnText.textContent = 'Learn More About Me';
+                }
+            }
+
             // Contact Form Handler with Formspree
             document.getElementById('contactForm').addEventListener('submit', async function (e) {
                 e.preventDefault();
