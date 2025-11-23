@@ -5,6 +5,7 @@ This is a personal portfolio website for **Sabarish Shanmugam**, a Senior Busine
 
 ## Structure
 - `index.html` – Single‑page application with sections: About, Projects, Process, Articles, Contact.
+- `assets/images/` – Directory containing all project icons and images.
 - `style_guide.md` – Defines colors, typography, spacing, components, accessibility, and performance guidelines.
 - `ui_ux_audit.md` – CXO‑level audit report with Lighthouse scores, visual design review, interaction, security, and recommendations.
 - `documentation.md` – This file, describing architecture, dependencies, and how to run tests.

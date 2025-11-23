@@ -34,7 +34,7 @@
 - Honeypot and reCAPTCHA mitigate spam.
 
 ## Recommendations
-- Replace placeholder `YOUR_SITE_KEY` with actual reCAPTCHA site key.
+- Replace placeholder `YOUR_SITE_KEY` with actual reCAPTCHA site key (Completed).
 - Enable Formspree 2FA for added security.
 - Consider lazy‑loading images for further performance gains.
 
