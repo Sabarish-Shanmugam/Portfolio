@@ -960,6 +960,8 @@
             }
         }
     </style>
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://formspree.io; script-src 'self' https://www.google.com/recaptcha/;">
 </head>
 
 <body>
@@ -1092,7 +1094,7 @@
                     <!-- Project 1: ReqWise -->
                     <article class="project-card">
                         <div class="project-image" role="img" aria-label="ReqWise AI Assistant">
-                            <img src="reqwise_icon.png" alt="ReqWise AI Requirements Assistant">
+                            <img src="assets/images/reqwise_icon.png" alt="ReqWise AI Requirements Assistant">
                         </div>
                         <div class="project-content">
                             <h3 class="project-title">ReqWise: AI Requirements Assistant</h3>
@@ -1117,7 +1119,7 @@
                     <!-- Project 2: Vithagan -->
                     <article class="project-card">
                         <div class="project-image" role="img" aria-label="Vithagan Diagram Generator">
-                            <img src="vithagan_icon.png" alt="Vithagan Natural Language to Diagrams">
+                            <img src="assets/images/vithagan_icon.png" alt="Vithagan Natural Language to Diagrams">
                         </div>
                         <div class="project-content">
                             <h3 class="project-title">Vithagan: Natural Language to Diagrams</h3>
@@ -1142,7 +1144,7 @@
                     <!-- Project 3: Ultimate Diagram Master -->
                     <article class="project-card">
                         <div class="project-image" role="img" aria-label="Ultimate Diagram Master">
-                            <img src="diagram_master_icon.png" alt="Ultimate Diagram Master">
+                            <img src="assets/images/diagram_master_icon.png" alt="Ultimate Diagram Master">
                         </div>
                         <div class="project-content">
                             <h3 class="project-title">Ultimate Diagram Master</h3>
@@ -1374,7 +1376,8 @@
                 <p style="color: #a0aec0; margin: 0.5rem 0 1.5rem;">Fill out the form below and I'll get back to you
                     soon!
                 </p>
-
+                <p class="privacy-notice">Your email address will be sent securely to my inbox via Formspree. I do not
+                    store any personal data beyond this message.</p>
                 <form class="contact-form" id="contactForm" action="https://formspree.io/f/xqanogoz" method="POST">
                     <div class="form-group">
                         <label for="name">Your Name *</label>
@@ -1394,6 +1397,7 @@
 
                     <!-- Honeypot for spam protection -->
                     <input type="text" name="_gotcha" style="display:none">
+                    <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div>
 
                     <button type="submit" class="form-submit">Send Message 📧</button>
 
@@ -1491,6 +1495,7 @@
 
                 try {
                     const formData = new FormData(e.target);
+                    formData.append('g-recaptcha-response', grecaptcha.getResponse());
 
                     const response = await fetch('https://formspree.io/f/xqanogoz', {
                         method: 'POST',
@@ -1519,6 +1524,7 @@
             });
         </script>
 
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 
 </html>
