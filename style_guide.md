@@ -35,4 +35,4 @@
 - Images optimized, served via CDN if possible.
 
 ---
-*Generated on 2025‑11‑24*
+*Generated on 2025-11-26*

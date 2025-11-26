@@ -35,4 +35,4 @@ This is a personal portfolio website for **Sabarish Shanmugam**, a Senior Busine
 - **Maintainability**: CSS variables and component‑based markup for easy updates.
 
 ---
-*Generated on 2025‑11‑24*
+*Generated on 2025-11-26*
