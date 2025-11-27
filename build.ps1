@@ -15,9 +15,11 @@ if (-not (Test-Path $envFile)) {
 
 # 2. Read GA ID from .env
 $gaId = $null
-Get-Content $envFile | ForEach-Object {
-    if ($_ -match '^GA_MEASUREMENT_ID=(.*)') {
+$lines = Get-Content $envFile
+foreach ($line in $lines) {
+    if ($line -match '^GA_MEASUREMENT_ID=(.*)') {
         $gaId = $matches[1].Trim()
+        break
     }
 }
 
@@ -51,7 +53,8 @@ foreach ($file in $htmlFiles) {
         $newContent = $content -replace "G-XXXXXXX", $gaId
         Set-Content -Path $file.FullName -Value $newContent
         Write-Host "   ✅ Updated $($file.Name)"
-    } else {
+    }
+    else {
         Write-Host "   ⚠️  No placeholder found in $($file.Name)"
     }
 }
