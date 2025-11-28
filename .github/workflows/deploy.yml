@@ -31,7 +31,7 @@ jobs:
         shell: pwsh
         env:
           # Use the secret if available, otherwise use a placeholder to prevent build failure
-          GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID || 'G-XXXXXXX' }}
+          GA_MEASUREMENT_ID: ${{ secrets['GA_MEASUREMENT_ID'] || 'G-XXXXXXX' }}
         run: ./build.ps1
 
       - name: Upload artifact
