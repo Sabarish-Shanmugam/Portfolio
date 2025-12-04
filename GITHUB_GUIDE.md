@@ -1,111 +1,165 @@
 # GitHub & Portfolio Management Guide
 
-This document serves as a "cheat sheet" for manually managing your portfolio website, handling Git operations, and troubleshooting deployment issues.
+This document serves as a quick reference for managing your portfolio website, handling Git operations, and troubleshooting deployment issues.
 
-## 1. Manual Git Operations (The Basics)
+**Last Updated:** December 5, 2025
 
-If you need to make changes when I'm unavailable, use these commands in your terminal (PowerShell or Command Prompt).
+---
 
-### **Check Status**
-See which files have changed:
+## 1. Git Quick Reference
+
+### Check Status
 ```powershell
 git status
 ```
 
-### **Stage Changes**
-Prepare files for saving.
-*   **Stage all changes:**
-    ```powershell
-    git add .
-    ```
-*   **Stage a specific file:**
-    ```powershell
-    git add index.html
-    ```
-
-### **Commit Changes**
-Save the staged changes with a message describing what you did.
+### Stage & Commit Changes
 ```powershell
-git commit -m "Description of your changes"
+# Stage all changes
+git add .
+
+# Or stage specific file
+git add index.html
+
+# Commit with message
+git commit -m "Description of changes"
 ```
 
-### **Push to GitHub**
-Send your saved changes to the live repository.
+### Push to GitHub
 ```powershell
+# Push to main branch
+git push origin main
+
+# Push to feature branch
+git push origin branch-name
+```
+
+### Restore Previous Version
+```powershell
+# Undo all local changes (WARNING: destructive!)
+git checkout .
+
+# Restore specific file from last commit
+git checkout HEAD -- index.html
+```
+
+---
+
+## 2. Adding a New Article
+
+### Steps:
+1. Open `index.html`
+2. Find `<div class="article-grid featured-articles">`
+3. Copy an existing `<article class="article-card">` block
+4. Paste it as the **first article** in the grid
+5. Update: date, tags, title, description, and link
+6. **Important**: Keep only 6-7 articles in featured. Move older ones to archive.
+
+### Article Template:
+```html
+<article class="article-card">
+    <div class="article-meta">Month Year • Category</div>
+    <div class="tags"><span class="tag">Tag1</span><span class="tag">Tag2</span></div>
+    <h3>Article Title</h3>
+    <p class="project-description">Brief description of the article.</p>
+    <a href="LINKEDIN_URL" class="link-text" target="_blank" rel="noopener noreferrer">Read on LinkedIn →</a>
+</article>
+```
+
+---
+
+## 3. Deployment
+
+### Automatic Deployment
+- Push to `main` branch triggers GitHub Actions
+- Deploys to: `https://sabarish-shanmugam.github.io/Portfolio/`
+- Takes 1-2 minutes to propagate
+
+### Check Deployment Status
+1. Go to GitHub repository
+2. Click **Actions** tab
+3. View latest workflow run
+
+### Emergency: Bypass Build Script
+If `build.ps1` fails, edit `.github/workflows/deploy.yml`:
+
+```yaml
+# Replace build step with:
+- name: Build Site
+  shell: pwsh
+  run: |
+    New-Item -ItemType Directory -Path dist -Force
+    Copy-Item -Path ./* -Destination dist -Recurse -Exclude .git,.github,dist
+```
+
+---
+
+## 4. Branch Management
+
+### Current Branches:
+| Branch | Purpose |
+|--------|---------|
+| `main` | Production (live site) |
+| `articles-update` | Article updates (merge when ready) |
+
+### Create Feature Branch:
+```powershell
+git checkout -b feature/new-feature
+# Make changes...
+git push origin feature/new-feature
+```
+
+### Merge to Main:
+```powershell
+git checkout main
+git merge feature-branch
 git push origin main
 ```
 
 ---
 
-## 2. Deployment Troubleshooting (`deploy.yml`)
+## 5. Key Files
 
-Your site uses **GitHub Actions** to deploy. The configuration file is at `.github/workflows/deploy.yml`.
-
-### **The "GA_MEASUREMENT_ID" Warning**
-You might see a warning about `secrets.GA_MEASUREMENT_ID`. This is because the build script (`build.ps1`) expects a Google Analytics ID to be injected.
-
-**How to fix it:**
-1.  Go to your GitHub Repository.
-2.  Click **Settings** > **Secrets and variables** > **Actions**.
-3.  Click **New repository secret**.
-4.  **Name**: `GA_MEASUREMENT_ID`
-5.  **Value**: Your actual Google Analytics ID (e.g., `G-123456789`).
-6.  Click **Add secret**.
-
-### **Bypassing the Build Script (Emergency Mode)**
-If the build script (`build.ps1`) keeps failing and you just want to publish the HTML files as they are:
-
-1.  Open `.github/workflows/deploy.yml`.
-2.  Find the **Build Site** step (around line 30).
-3.  Replace the `run: ./build.ps1` command with a simple copy command.
-
-**Original:**
-```yaml
-      - name: Build Site
-        shell: pwsh
-        env:
-          GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
-        run: ./build.ps1
-```
-
-**Emergency Bypass (Direct Copy):**
-```yaml
-      - name: Build Site
-        shell: pwsh
-        run: |
-          New-Item -ItemType Directory -Path dist -Force
-          Copy-Item -Path ./* -Destination dist -Recurse -Exclude .git,.github,dist
-```
+| File | Purpose |
+|------|---------|
+| `index.html` | Main website page |
+| `assets/images/` | Project icons and images |
+| `.github/workflows/deploy.yml` | CI/CD deployment config |
+| `build.ps1` | Build script (injects Analytics) |
+| `documentation.md` | Project documentation |
+| `style_guide.md` | Design system reference |
+| `ui_ux_audit.md` | UX audit report |
 
 ---
 
-## 3. Common Tasks & Fixes
+## 6. Troubleshooting
 
-### **Restoring a Previous Version**
-If you break something and want to go back to the last working version:
+### Form Not Submitting
+- Check internet connection
+- Verify reCAPTCHA is loaded
+- Check Formspree endpoint in `index.html`
+
+### Site Not Updating
+- Wait 2-3 minutes for cache
+- Hard refresh: `Ctrl + Shift + R`
+- Check GitHub Actions for errors
+
+### Broken Layout
 ```powershell
-git checkout .
+# Restore from last good commit
+git checkout HEAD -- index.html
 ```
-*(Warning: This undoes all unsaved local changes!)*
-
-### **Updating the Blog**
-To add a new article manually:
-1.  Open `index.html`.
-2.  Search for `<!-- NEW ARTICLE -->` or `class="article-grid"`.
-3.  Copy an existing `<article>` block.
-4.  Paste it at the top of the list.
-5.  Update the text and links.
-6.  **Important**: Keep only 6 articles in the main grid. Move older ones to the `archiveContainer` table at the bottom.
-
-### **Checking the Live Site**
-Your site is deployed to: `https://sabarish-shanmugam.github.io/Portfolio/`
-*   **Note**: Changes can take 1-2 minutes to appear after pushing.
-*   **Check Progress**: Go to the **Actions** tab in your GitHub repo to see the deployment status.
 
 ---
 
-## 4. Key Files Overview
-*   `index.html`: The main homepage file.
-*   `assets/`: Folder containing images and styles.
-*   `.github/workflows/deploy.yml`: The automation script that publishes your site.
-*   `build.ps1`: A helper script that prepares files for publishing (injects Analytics ID).
+## 7. Google Analytics
+
+### Add GA_MEASUREMENT_ID Secret:
+1. GitHub Repository → **Settings**
+2. **Secrets and variables** → **Actions**
+3. **New repository secret**
+4. Name: `GA_MEASUREMENT_ID`
+5. Value: Your GA ID (e.g., `G-XXXXXXXXXX`)
+
+---
+*Guide for: Sabarish Shanmugam Portfolio*
