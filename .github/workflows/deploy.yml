@@ -41,6 +41,14 @@ jobs:
 
   # Deployment job
   deploy:
+    # NOTE: some org / repo settings can override top-level permissions —
+    # adding job-level permissions ensures the `deploy` step can request an
+    # OIDC id-token and write Pages artifacts (prevents "Ensure GITHUB_TOKEN has
+    # permission 'id-token: write'" failures).
+    permissions:
+      id-token: write
+      pages: write
+      contents: read
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
