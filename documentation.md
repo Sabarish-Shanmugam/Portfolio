@@ -27,7 +27,7 @@ My Personal Website/
 1. **About** - Professional summary with expandable details
 2. **Selected Work** - 3 featured projects (ReqWise, Vithagan, Ultimate Diagram Master)
 3. **My Transformation Process** - 5-step timeline (Discovery → Optimize)
-4. **Thoughts & Writing** - 7 featured articles + archived articles toggle
+4. **Thoughts & Writing** - 6 featured articles + archived articles toggle
 5. **Contact** - Form with Formspree integration and reCAPTCHA
 
 ## Current Articles (as of December 2025)
